@@ -1,13 +1,11 @@
 package com.jetbrains;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -81,18 +79,77 @@ public class DataloreLandingPage {
     public void clickOnShowPasswordButton() {
         passwordInputShowButton.click();
     }
+    public void clickOnLogInButton() {
+        logInButton.click();
+    }
 
     public void inputPassword(String pass) {
         passwordInput.sendKeys(pass);
+
+    }
+    public void inputEmail(String pass) {
+        emailInput.sendKeys(pass);
     }
 
+    public void switchToOpenedTab(WebDriver driver) {
+        String currentWindowHandle = driver.getWindowHandle();
+        Set<String> allWindowHandles = driver.getWindowHandles();
+
+        for (String windowHandle : allWindowHandles) {
+            if (!windowHandle.equals(currentWindowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+    }
 
     //Checks
+    public void checkDocumentationUrl(WebDriver driver) {
+        assertThat(driver.getCurrentUrl(),
+                equalTo("https://www.jetbrains.com/help/datalore/datalore-quickstart.html"));
+    }
+    public void checkAfterLoginUrl(WebDriver driver) {
+        assertThat(driver.getCurrentUrl(),
+                equalTo("https://k8s.stable.on-premise.datalore.io/notebooks"));
+    }
+
+    public void checkDocumentationTabTitle(WebDriver driver) {
+        assertThat(driver.getTitle(),
+                equalTo("Quick start tutorial | Datalore Documentation"));
+    }
+    public void checkForumUrl(WebDriver driver) {
+        assertThat(driver.getCurrentUrl(),
+                equalTo("https://datalore-forum.jetbrains.com/"));
+    }
+
+    public void checkForumTabTitle(WebDriver driver) {
+        assertThat(driver.getTitle(),
+                equalTo("Datalore Forum"));
+
+    }    public void checkBlogUrl(WebDriver driver) {
+        assertThat(driver.getCurrentUrl(),
+                equalTo("https://blog.jetbrains.com/datalore/"));
+    }
+
+    public void checkBlogTabTitle(WebDriver driver) {
+        assertThat(driver.getTitle(),
+                equalTo("The JetBrains Datalore Blog : Collaborative data science platform for teams. | The JetBrains Blog"));
+    }
+
+    public void checkSupportEmailAddress() {
+        assertThat("Email is not correct",
+                supportButton.getAttribute("href"),
+                equalTo("mailto:contact@datalore.jetbrains.com")
+        );
+    }
+
     public void checkLogInHereButtonDisplayed() {
         assertThat("Login in here button is not displayed", logInHereButton.isDisplayed(), equalTo(true));
     }
+
     public void checkCreateAccountButtonDisplayed() {
-        assertThat("Create account button is not displayed", createAccountButton.isDisplayed(), equalTo(true));
+        assertThat("Create account button is not displayed", createAccountButton.isDisplayed(),
+                equalTo(true));
     }
 
     public void checkLoginHeaderText(String text) {
@@ -109,13 +166,18 @@ public class DataloreLandingPage {
         assertThat("Login block header is not displayed", loginBlockHeader.isDisplayed(), equalTo(true));
         assertThat("Email input is not displayed", emailInput.isDisplayed(), equalTo(true));
         assertThat("Password input is not displayed", passwordInput.isDisplayed(), equalTo(true));
-        assertThat("Password input show button is not displayed", passwordInputShowButton.isDisplayed(), equalTo(true));
+        assertThat("Password input show button is not displayed", passwordInputShowButton.isDisplayed(),
+                equalTo(true));
         assertThat("Log in button is not displayed", logInButton.isDisplayed(), equalTo(true));
-        assertThat("Create an account button is not displayed", createAnAccountButton.isDisplayed(), equalTo(true));
-        assertThat("Forgot password button is not displayed", forgotPasswordButton.isDisplayed(), equalTo(true));
+        assertThat("Create an account button is not displayed", createAnAccountButton.isDisplayed(),
+                equalTo(true));
+        assertThat("Forgot password button is not displayed", forgotPasswordButton.isDisplayed(),
+                equalTo(true));
         assertThat("Support button is not displayed", supportButton.isDisplayed(), equalTo(true));
-        assertThat("Documentation button is not displayed", documentationButton.isDisplayed(), equalTo(true));
-        assertThat("Community Forum button is not displayed", communityForumButton.isDisplayed(), equalTo(true));
+        assertThat("Documentation button is not displayed", documentationButton.isDisplayed(),
+                equalTo(true));
+        assertThat("Community Forum button is not displayed", communityForumButton.isDisplayed(),
+                equalTo(true));
         assertThat("Blog button is not displayed", blogButton.isDisplayed(), equalTo(true));
     }
 

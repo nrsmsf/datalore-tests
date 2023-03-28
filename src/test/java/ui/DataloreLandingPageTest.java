@@ -2,14 +2,12 @@ package ui;
 
 import com.github.javafaker.Faker;
 import com.jetbrains.DataloreLandingPage;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.Set;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 @DisplayName("UI Tests for Datalore landing page")
 public class DataloreLandingPageTest {
@@ -58,39 +56,49 @@ public class DataloreLandingPageTest {
     }
 
     @Test
-    @DisplayName("Check that documentation button")
-    public void documentationButtonCheckTest() {
+    @DisplayName("Check that email address is correct")
+    public void checkEmailAddressTest() {
+        var dataloreLandingPage = new DataloreLandingPage(driver);
+        dataloreLandingPage.checkSupportEmailAddress();
+    }
+
+    @Test
+    @DisplayName("Check that documentation opens correctly")
+    public void checkDocumentationButtonTest() {
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.clickOnDocumentationButton();
-        String currentWindowHandle = driver.getWindowHandle();
-        Set<String> allWindowHandles = driver.getWindowHandles();
-
-        for (String windowHandle : allWindowHandles) {
-            if (!windowHandle.equals(currentWindowHandle)) {
-                driver.switchTo().window(windowHandle);
-                break;
-            }
-        }
-        assertThat(driver.getCurrentUrl(),
-                equalTo("https://www.jetbrains.com/help/datalore/datalore-quickstart.html"));
-
-        assertThat(driver.getTitle(),
-                equalTo("Quick start tutorial | Datalore Documentation"));
+        dataloreLandingPage.switchToOpenedTab(driver);
+        dataloreLandingPage.checkDocumentationUrl(driver);
+        dataloreLandingPage.checkDocumentationTabTitle(driver);
     }
-
     @Test
-    @DisplayName("Check that forum button exists")
-    public void forumCheckTest() throws InterruptedException {
+    @DisplayName("Check that community forum opens correctly")
+    public void checkForumButtonTest() {
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.clickOnCommunityForumButton();
-        Thread.sleep(5000);
+        dataloreLandingPage.switchToOpenedTab(driver);
+        dataloreLandingPage.checkForumUrl(driver);
+        dataloreLandingPage.checkForumTabTitle(driver);
+    }
+    @Test
+    @DisplayName("Check that community forum opens correctly")
+    public void checkBlogButtonTest() {
+        var dataloreLandingPage = new DataloreLandingPage(driver);
+        dataloreLandingPage.clickOnBlogButton();
+        dataloreLandingPage.switchToOpenedTab(driver);
+        dataloreLandingPage.checkBlogUrl(driver);
+        dataloreLandingPage.checkBlogTabTitle(driver);
     }
 
     @Test
-    @DisplayName("Check that blog button exists")
-    public void blogCheckTest() throws InterruptedException {
+    @DisplayName("Check login positive scenario works correctly")
+    public void checkPositiveLoginTest() throws InterruptedException {
         var dataloreLandingPage = new DataloreLandingPage(driver);
-        dataloreLandingPage.clickOnBlogButton();
-        Thread.sleep(5000);
+        dataloreLandingPage.inputEmail("1nrsmsf@gmail.com");
+        dataloreLandingPage.inputPassword("H$2c5%cwdjb");
+        dataloreLandingPage.clickOnLogInButton();
+        Thread.sleep(10000);
+        dataloreLandingPage.checkAfterLoginUrl(driver);
     }
+
 }
