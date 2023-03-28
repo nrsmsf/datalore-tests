@@ -1,5 +1,6 @@
 package com.jetbrains;
 
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -92,7 +93,7 @@ public class DataloreLandingPage {
         emailInput.sendKeys(pass);
     }
 
-    public void switchToOpenedTab(WebDriver driver) {
+    public void switchToOpenedTab(@NotNull WebDriver driver) {
         String currentWindowHandle = driver.getWindowHandle();
         Set<String> allWindowHandles = driver.getWindowHandles();
 
@@ -110,34 +111,34 @@ public String decodePassword(String pass){
 }
 
     //Checks
-    public void checkDocumentationUrl(WebDriver driver) {
+    public void checkDocumentationUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://www.jetbrains.com/help/datalore/datalore-quickstart.html"));
     }
-    public void checkAfterLoginUrl(WebDriver driver) {
+    public void checkAfterLoginUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://k8s.stable.on-premise.datalore.io/notebooks"));
     }
 
-    public void checkDocumentationTabTitle(WebDriver driver) {
+    public void checkDocumentationTabTitle(@NotNull WebDriver driver) {
         assertThat(driver.getTitle(),
                 equalTo("Quick start tutorial | Datalore Documentation"));
     }
-    public void checkForumUrl(WebDriver driver) {
+    public void checkForumUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://datalore-forum.jetbrains.com/"));
     }
 
-    public void checkForumTabTitle(WebDriver driver) {
+    public void checkForumTabTitle(@NotNull WebDriver driver) {
         assertThat(driver.getTitle(),
                 equalTo("Datalore Forum"));
 
-    }    public void checkBlogUrl(WebDriver driver) {
+    }    public void checkBlogUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://blog.jetbrains.com/datalore/"));
     }
 
-    public void checkBlogTabTitle(WebDriver driver) {
+    public void checkBlogTabTitle(@NotNull WebDriver driver) {
         assertThat(driver.getTitle(),
                 equalTo("The JetBrains Datalore Blog : Collaborative data science platform for teams. | The JetBrains Blog"));
     }
