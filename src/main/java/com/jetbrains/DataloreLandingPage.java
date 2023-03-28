@@ -1,10 +1,13 @@
 package com.jetbrains;
 
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Base64;
 import java.util.Set;
@@ -44,6 +47,8 @@ public class DataloreLandingPage {
     @FindBy(xpath = "//button[@data-test='button' and text() = 'Forgot your password?']")
     private WebElement forgotPasswordButton;
 
+    @FindBy(xpath = "//div[@class = ' login-inputs']/following-sibling::div[1]")
+    private WebElement forgotPasswordEmailSent;
 
     @FindBy(linkText = "Support")
     private WebElement supportButton;
@@ -83,6 +88,9 @@ public class DataloreLandingPage {
     }
     public void clickOnLogInButton() {
         logInButton.click();
+
+    }    public void clickOnForgotPasswordButton() {
+        forgotPasswordButton.click();
     }
 
     public void inputPassword(String pass) {
@@ -91,6 +99,17 @@ public class DataloreLandingPage {
     }
     public void inputEmail(String pass) {
         emailInput.sendKeys(pass);
+    }
+
+    public void waitLoggedPage(@NotNull WebDriverWait wait){
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[@class='button-group list-button type--primary ']/button[1]")));
+        assertThat(element.isDisplayed(), equalTo(true));
+    }
+    public void waitEmailSent(@NotNull WebDriverWait wait){
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[@class = ' login-inputs']/following-sibling::div[3]")));
+        assertThat(element.isDisplayed(), equalTo(true));
     }
 
     public void switchToOpenedTab(@NotNull WebDriver driver) {
@@ -162,6 +181,11 @@ public String decodePassword(String pass){
     public void checkLoginHeaderText(String text) {
         assertThat("Login header text is: " + loginBlockHeader.getText(),
                 loginBlockHeader.getText(), equalTo(text));
+    }
+    public void checkForgotPasswordEmailSentText(String email) {
+        assertThat("Forgot password text is: " + forgotPasswordEmailSent.getText(),
+                forgotPasswordEmailSent.getText(),
+                equalTo("Check your email "+ email + " for instructions."));
     }
 
     public void checkPasswordInputType(String type) {
