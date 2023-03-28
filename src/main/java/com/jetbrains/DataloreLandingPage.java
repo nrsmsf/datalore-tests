@@ -227,15 +227,17 @@ public class DataloreLandingPage {
         assertThat("Password input type is: " + actualType, actualType, equalTo(type));
     }
 
-    public void checkEmailRequiredMessageDisplayed(){
+    public void checkEmailRequiredMessageDisplayed() {
         assertThat("Email is required message is not displayed",
                 emailRequiredMessage.isDisplayed(), equalTo(true));
     }
-    public void checkEmailInvalidMessageDisplayed(){
+
+    public void checkEmailInvalidMessageDisplayed() {
         assertThat("Email is invalid message is not displayed",
                 emailInvalidMessage.isDisplayed(), equalTo(true));
     }
-        public void checkPasswordRequiredMessageDisplayed(){
+
+    public void checkPasswordRequiredMessageDisplayed() {
         assertThat("Password is required message is not displayed",
                 passwordInvalidMessage.isDisplayed(), equalTo(true));
     }
