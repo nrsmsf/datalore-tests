@@ -157,40 +157,14 @@ public class DataloreLandingPage {
     }
 
     //Checks
-    public void checkDocumentationUrl(@NotNull WebDriver driver) {
+    public void checkElementUrl(@NotNull WebDriver driver, @NotNull String url) {
         assertThat(driver.getCurrentUrl(),
-                equalTo("https://www.jetbrains.com/help/datalore/datalore-quickstart.html"));
+                equalTo(url));
     }
 
-    public void checkAfterLoginUrl(@NotNull WebDriver driver) {
-        assertThat(driver.getCurrentUrl(),
-                equalTo("https://k8s.stable.on-premise.datalore.io/notebooks"));
-    }
-
-    public void checkDocumentationTabTitle(@NotNull WebDriver driver) {
+    public void checkTabTitleText(@NotNull WebDriver driver, @NotNull String title) {
         assertThat(driver.getTitle(),
-                equalTo("Quick start tutorial | Datalore Documentation"));
-    }
-
-    public void checkForumUrl(@NotNull WebDriver driver) {
-        assertThat(driver.getCurrentUrl(),
-                equalTo("https://datalore-forum.jetbrains.com/"));
-    }
-
-    public void checkForumTabTitle(@NotNull WebDriver driver) {
-        assertThat(driver.getTitle(),
-                equalTo("Datalore Forum"));
-
-    }
-
-    public void checkBlogUrl(@NotNull WebDriver driver) {
-        assertThat(driver.getCurrentUrl(),
-                equalTo("https://blog.jetbrains.com/datalore/"));
-    }
-
-    public void checkBlogTabTitle(@NotNull WebDriver driver) {
-        assertThat(driver.getTitle(),
-                equalTo("The JetBrains Datalore Blog : Collaborative data science platform for teams. | The JetBrains Blog"));
+                equalTo(title));
     }
 
     public void checkSupportEmailAddress() {

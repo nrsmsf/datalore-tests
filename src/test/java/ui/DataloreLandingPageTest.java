@@ -20,6 +20,7 @@ public class DataloreLandingPageTest {
     WebDriver driver = new ChromeDriver();
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+
     @BeforeEach
     public void setUp() {
         driver.get("https://k8s.stable.on-premise.datalore.io/");
@@ -70,31 +71,38 @@ public class DataloreLandingPageTest {
     @Test
     @DisplayName("Check that documentation opens correctly")
     public void checkDocumentationButtonTest() {
+        final var documentationUrl = "https://www.jetbrains.com/help/datalore/datalore-quickstart.html";
+        final var docTabTitle = "Quick start tutorial | Datalore Documentation";
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.clickOnDocumentationButton();
         dataloreLandingPage.switchToOpenedTab(driver);
-        dataloreLandingPage.checkDocumentationUrl(driver);
-        dataloreLandingPage.checkDocumentationTabTitle(driver);
+        dataloreLandingPage.checkElementUrl(driver, documentationUrl);
+        dataloreLandingPage.checkTabTitleText(driver, docTabTitle);
     }
 
     @Test
     @DisplayName("Check that community forum opens correctly")
     public void checkForumButtonTest() {
+        final var forumUrl = "https://datalore-forum.jetbrains.com/";
+        final var forumTabTitle = "Datalore Forum";
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.clickOnCommunityForumButton();
         dataloreLandingPage.switchToOpenedTab(driver);
-        dataloreLandingPage.checkForumUrl(driver);
-        dataloreLandingPage.checkForumTabTitle(driver);
+        dataloreLandingPage.checkElementUrl(driver, forumUrl);
+        dataloreLandingPage.checkTabTitleText(driver, forumTabTitle);
     }
 
     @Test
     @DisplayName("Check that blog opens correctly")
     public void checkBlogButtonTest() {
+        final var blogUrl = "https://blog.jetbrains.com/datalore/";
+        final var blogTabTitle =
+                "The JetBrains Datalore Blog : Collaborative data science platform for teams. | The JetBrains Blog";
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.clickOnBlogButton();
         dataloreLandingPage.switchToOpenedTab(driver);
-        dataloreLandingPage.checkBlogUrl(driver);
-        dataloreLandingPage.checkBlogTabTitle(driver);
+        dataloreLandingPage.checkElementUrl(driver, blogUrl);
+        dataloreLandingPage.checkTabTitleText(driver, blogTabTitle);
     }
 
     @Test
@@ -138,13 +146,14 @@ public class DataloreLandingPageTest {
     @DisplayName("Check login positive scenario works correctly")
     public void checkPositiveLoginTest() {
         var dataloreLandingPage = new DataloreLandingPage(driver);
+        final var afterLoginUrl = "https://k8s.stable.on-premise.datalore.io/notebooks";
         dataloreLandingPage.inputEmail("1nrsmsf@gmail.com");
         dataloreLandingPage.inputPassword(
                 dataloreLandingPage.decodePassword("SCQyYzUlY3dkamI=")
         );
         dataloreLandingPage.clickOnLogInButton();
         dataloreLandingPage.waitLoggedPage(wait);
-        dataloreLandingPage.checkAfterLoginUrl(driver);
+        dataloreLandingPage.checkElementUrl(driver, afterLoginUrl);
     }
 
     @Test
