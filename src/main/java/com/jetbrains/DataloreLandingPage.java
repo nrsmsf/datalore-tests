@@ -206,6 +206,7 @@ public class DataloreLandingPage {
                 forgotPasswordEmailSentText.getText(),
                 equalTo("Check your email " + email + " for instructions."));
     }
+
     public void checkWrongPasswordAlertText() {
         assertThat("Alert text is: " + wrongPasswordAlertText.getText(),
                 wrongPasswordAlertText.getText(),
