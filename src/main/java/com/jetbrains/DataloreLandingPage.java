@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.Base64;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -102,6 +103,11 @@ public class DataloreLandingPage {
             }
         }
     }
+
+public String decodePassword(String pass){
+    var decodedBytes = Base64.getDecoder().decode(pass);
+    return new String(decodedBytes);
+}
 
     //Checks
     public void checkDocumentationUrl(WebDriver driver) {

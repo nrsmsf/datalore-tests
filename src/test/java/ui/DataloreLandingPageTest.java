@@ -95,7 +95,9 @@ public class DataloreLandingPageTest {
     public void checkPositiveLoginTest() throws InterruptedException {
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.inputEmail("1nrsmsf@gmail.com");
-        dataloreLandingPage.inputPassword("H$2c5%cwdjb");
+        dataloreLandingPage.inputPassword(
+                dataloreLandingPage.decodePassword("SCQyYzUlY3dkamI=")
+        );
         dataloreLandingPage.clickOnLogInButton();
         Thread.sleep(10000);
         dataloreLandingPage.checkAfterLoginUrl(driver);
