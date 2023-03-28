@@ -158,12 +158,14 @@ public class DataloreLandingPage {
 
     //Checks
     public void checkElementUrl(@NotNull WebDriver driver, @NotNull String url) {
-        assertThat(driver.getCurrentUrl(),
+        assertThat("URL is not correct",
+                driver.getCurrentUrl(),
                 equalTo(url));
     }
 
     public void checkTabTitleText(@NotNull WebDriver driver, @NotNull String title) {
-        assertThat(driver.getTitle(),
+        assertThat("Tab title is not correct",
+                driver.getTitle(),
                 equalTo(title));
     }
 
