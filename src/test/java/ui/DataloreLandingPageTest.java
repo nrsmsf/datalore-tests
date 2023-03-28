@@ -60,7 +60,7 @@ public class DataloreLandingPageTest {
     }
 
     @Test
-    @DisplayName("Check that email address is correct")
+    @DisplayName("Check that email address of support is correct")
     public void checkEmailAddressTest() {
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.checkSupportEmailAddress();
@@ -87,7 +87,7 @@ public class DataloreLandingPageTest {
     }
 
     @Test
-    @DisplayName("Check that community forum opens correctly")
+    @DisplayName("Check that blog opens correctly")
     public void checkBlogButtonTest() {
         var dataloreLandingPage = new DataloreLandingPage(driver);
         dataloreLandingPage.clickOnBlogButton();
