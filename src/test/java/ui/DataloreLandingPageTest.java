@@ -120,4 +120,15 @@ public class DataloreLandingPageTest {
         dataloreLandingPage.checkAfterLoginUrl(driver);
     }
 
+    @Test
+    @DisplayName("Check login negative scenario works correctly")
+    public void checkNegativeLoginTest() {
+        var dataloreLandingPage = new DataloreLandingPage(driver);
+        dataloreLandingPage.inputEmail(faker.internet().emailAddress());
+        dataloreLandingPage.inputPassword(faker.internet().password());
+        dataloreLandingPage.clickOnLogInButton();
+        dataloreLandingPage.waitWrongPasswordAlert(wait);
+        dataloreLandingPage.checkWrongPasswordAlertText();
+    }
+
 }

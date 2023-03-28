@@ -48,7 +48,7 @@ public class DataloreLandingPage {
     private WebElement forgotPasswordButton;
 
     @FindBy(xpath = "//div[@class = ' login-inputs']/following-sibling::div[1]")
-    private WebElement forgotPasswordEmailSent;
+    private WebElement forgotPasswordEmailSentText;
 
     @FindBy(linkText = "Support")
     private WebElement supportButton;
@@ -61,6 +61,9 @@ public class DataloreLandingPage {
 
     @FindBy(linkText = "Blog")
     private WebElement blogButton;
+
+    @FindBy(xpath = "//div[@class='alert_message alert_message-error']/div[@class='alert_content']")
+    private WebElement wrongPasswordAlertText;
 
     public DataloreLandingPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -86,10 +89,13 @@ public class DataloreLandingPage {
     public void clickOnShowPasswordButton() {
         passwordInputShowButton.click();
     }
+
     public void clickOnLogInButton() {
         logInButton.click();
 
-    }    public void clickOnForgotPasswordButton() {
+    }
+
+    public void clickOnForgotPasswordButton() {
         forgotPasswordButton.click();
     }
 
@@ -97,18 +103,26 @@ public class DataloreLandingPage {
         passwordInput.sendKeys(pass);
 
     }
+
     public void inputEmail(String pass) {
         emailInput.sendKeys(pass);
     }
 
-    public void waitLoggedPage(@NotNull WebDriverWait wait){
+    public void waitLoggedPage(@NotNull WebDriverWait wait) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//div[@class='button-group list-button type--primary ']/button[1]")));
         assertThat(element.isDisplayed(), equalTo(true));
     }
-    public void waitEmailSent(@NotNull WebDriverWait wait){
+
+    public void waitEmailSent(@NotNull WebDriverWait wait) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//div[@class = ' login-inputs']/following-sibling::div[3]")));
+        assertThat(element.isDisplayed(), equalTo(true));
+    }
+
+    public void waitWrongPasswordAlert(@NotNull WebDriverWait wait) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[@class='alert_message alert_message-error']/div[@class='alert_content']")));
         assertThat(element.isDisplayed(), equalTo(true));
     }
 
@@ -124,16 +138,17 @@ public class DataloreLandingPage {
         }
     }
 
-public String decodePassword(String pass){
-    var decodedBytes = Base64.getDecoder().decode(pass);
-    return new String(decodedBytes);
-}
+    public String decodePassword(String pass) {
+        var decodedBytes = Base64.getDecoder().decode(pass);
+        return new String(decodedBytes);
+    }
 
     //Checks
     public void checkDocumentationUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://www.jetbrains.com/help/datalore/datalore-quickstart.html"));
     }
+
     public void checkAfterLoginUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://k8s.stable.on-premise.datalore.io/notebooks"));
@@ -143,6 +158,7 @@ public String decodePassword(String pass){
         assertThat(driver.getTitle(),
                 equalTo("Quick start tutorial | Datalore Documentation"));
     }
+
     public void checkForumUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://datalore-forum.jetbrains.com/"));
@@ -152,7 +168,9 @@ public String decodePassword(String pass){
         assertThat(driver.getTitle(),
                 equalTo("Datalore Forum"));
 
-    }    public void checkBlogUrl(@NotNull WebDriver driver) {
+    }
+
+    public void checkBlogUrl(@NotNull WebDriver driver) {
         assertThat(driver.getCurrentUrl(),
                 equalTo("https://blog.jetbrains.com/datalore/"));
     }
@@ -182,10 +200,16 @@ public String decodePassword(String pass){
         assertThat("Login header text is: " + loginBlockHeader.getText(),
                 loginBlockHeader.getText(), equalTo(text));
     }
+
     public void checkForgotPasswordEmailSentText(String email) {
-        assertThat("Forgot password text is: " + forgotPasswordEmailSent.getText(),
-                forgotPasswordEmailSent.getText(),
-                equalTo("Check your email "+ email + " for instructions."));
+        assertThat("Forgot password text is: " + forgotPasswordEmailSentText.getText(),
+                forgotPasswordEmailSentText.getText(),
+                equalTo("Check your email " + email + " for instructions."));
+    }
+    public void checkWrongPasswordAlertText() {
+        assertThat("Alert text is: " + wrongPasswordAlertText.getText(),
+                wrongPasswordAlertText.getText(),
+                equalTo("One or both of your email/password was incorrect"));
     }
 
     public void checkPasswordInputType(String type) {
