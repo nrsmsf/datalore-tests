@@ -2,6 +2,7 @@ package ui;
 
 import com.github.javafaker.Faker;
 import com.jetbrains.DataloreLandingPage;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -105,6 +106,32 @@ public class DataloreLandingPageTest {
         dataloreLandingPage.clickOnForgotPasswordButton();
         dataloreLandingPage.waitEmailSent(wait);
         dataloreLandingPage.checkForgotPasswordEmailSentText(email);
+    }
+
+    @Test
+    @DisplayName("Check email required message is displayed correctly")
+    public void checkEmailRequiredMessageTest() {
+        var dataloreLandingPage = new DataloreLandingPage(driver);
+        dataloreLandingPage.clickOnLogInButton();
+        dataloreLandingPage.checkEmailRequiredMessageDisplayed();
+    }
+
+    @Test
+    @DisplayName("Check password required message is displayed correctly")
+    public void checkPasswordRequiredMessageTest() {
+        var dataloreLandingPage = new DataloreLandingPage(driver);
+        dataloreLandingPage.clickOnLogInButton();
+        dataloreLandingPage.checkPasswordRequiredMessageDisplayed();
+    }
+
+    @Test
+    @DisplayName("Check email invalid message is displayed correctly")
+    public void checkEmailInvalidMessageTest() {
+        var dataloreLandingPage = new DataloreLandingPage(driver);
+        dataloreLandingPage.inputEmail(RandomStringUtils.randomAlphanumeric(5)
+                + "@" + RandomStringUtils.randomAlphanumeric(5));
+        dataloreLandingPage.clickOnLogInButton();
+        dataloreLandingPage.checkEmailInvalidMessageDisplayed();
     }
 
     @Test

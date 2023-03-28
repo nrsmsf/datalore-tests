@@ -47,6 +47,15 @@ public class DataloreLandingPage {
     @FindBy(xpath = "//button[@data-test='button' and text() = 'Forgot your password?']")
     private WebElement forgotPasswordButton;
 
+    @FindBy(xpath = "//div[@data-test = 'error-message']/span[contains(text(), 'Email is required')]")
+    private WebElement emailRequiredMessage;
+
+    @FindBy(xpath = "//div[@data-test = 'error-message']/span[contains(text(), 'Email is invalid')]")
+    private WebElement emailInvalidMessage;
+
+    @FindBy(xpath = "//div[@data-test = 'error-message']/span[contains(text(), 'Password is required')]")
+    private WebElement passwordInvalidMessage;
+
     @FindBy(xpath = "//div[@class = ' login-inputs']/following-sibling::div[1]")
     private WebElement forgotPasswordEmailSentText;
 
@@ -216,6 +225,19 @@ public class DataloreLandingPage {
     public void checkPasswordInputType(String type) {
         var actualType = passwordInput.getAttribute("type");
         assertThat("Password input type is: " + actualType, actualType, equalTo(type));
+    }
+
+    public void checkEmailRequiredMessageDisplayed(){
+        assertThat("Email is required message is not displayed",
+                emailRequiredMessage.isDisplayed(), equalTo(true));
+    }
+    public void checkEmailInvalidMessageDisplayed(){
+        assertThat("Email is invalid message is not displayed",
+                emailInvalidMessage.isDisplayed(), equalTo(true));
+    }
+        public void checkPasswordRequiredMessageDisplayed(){
+        assertThat("Password is required message is not displayed",
+                passwordInvalidMessage.isDisplayed(), equalTo(true));
     }
 
     public void checkAllElementsDisplayed() {
