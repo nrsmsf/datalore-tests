@@ -157,5 +157,4 @@ public class DataloreLandingPageTest {
         dataloreLandingPage.waitWrongPasswordAlert(wait);
         dataloreLandingPage.checkWrongPasswordAlertText();
     }
-
 }

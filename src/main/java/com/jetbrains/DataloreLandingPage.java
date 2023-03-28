@@ -17,6 +17,10 @@ import static org.hamcrest.Matchers.equalTo;
 
 // page_url = https://k8s.stable.on-premise.datalore.io/
 public class DataloreLandingPage {
+    String loggedPageButtonPath = "//div[@class='button-group list-button type--primary ']/button[1]";
+    String emailSentMessagePath = "//div[@class = ' login-inputs']/following-sibling::div[3]";
+    String wrongPasswordAlertPath = "//div[@class='alert_message alert_message-error']/div[@class='alert_content']";
+
 
     //Web elements
 
@@ -119,19 +123,19 @@ public class DataloreLandingPage {
 
     public void waitLoggedPage(@NotNull WebDriverWait wait) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@class='button-group list-button type--primary ']/button[1]")));
+                By.xpath(loggedPageButtonPath)));
         assertThat(element.isDisplayed(), equalTo(true));
     }
 
     public void waitEmailSent(@NotNull WebDriverWait wait) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@class = ' login-inputs']/following-sibling::div[3]")));
+                By.xpath(emailSentMessagePath)));
         assertThat(element.isDisplayed(), equalTo(true));
     }
 
     public void waitWrongPasswordAlert(@NotNull WebDriverWait wait) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@class='alert_message alert_message-error']/div[@class='alert_content']")));
+                By.xpath(wrongPasswordAlertPath)));
         assertThat(element.isDisplayed(), equalTo(true));
     }
 
