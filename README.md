@@ -3,7 +3,7 @@
 Java 17+
 
 ### Run tests
-
+ 
 #### macOS
 ```bash
 ./gradlew build
