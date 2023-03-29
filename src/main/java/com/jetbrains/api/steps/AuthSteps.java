@@ -29,6 +29,14 @@ public class AuthSteps {
                         .body(json.toString())
                         .when().post();
     }
+    @Step("Send POST request without body")
+    @Attachment
+    public Response auth() {
+        return
+                given()
+                        .spec(AuthRequestSpec.authRequestSpec())
+                        .when().post();
+    }
 
 
 }
