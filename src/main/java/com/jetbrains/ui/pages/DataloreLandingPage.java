@@ -60,8 +60,7 @@ public class DataloreLandingPage {
   @FindBy(xpath = "//div[@data-test = 'error-message']/span[contains(text(), 'Email is invalid')]")
   private WebElement emailInvalidMessage;
 
-  @FindBy(
-      xpath = "//div[@data-test = 'error-message']/span[contains(text(), 'Password is required')]")
+  @FindBy(xpath = "//div[@data-test = 'error-message']/span[contains(text(), 'Password is required')]")
   private WebElement passwordInvalidMessage;
 
   @FindBy(xpath = emailSentMessagePath)
@@ -194,8 +193,7 @@ public class DataloreLandingPage {
 
   @Step("Check that email address of support is correct")
   public DataloreLandingPage checkSupportEmailAddress() {
-    assertThat(
-        "Email is not correct",
+    assertThat("Email is not correct",
         supportButton.getAttribute("href"),
         equalTo("mailto:contact@datalore.jetbrains.com"));
     return this;
@@ -203,24 +201,19 @@ public class DataloreLandingPage {
 
   @Step("Check that login in here button is displayed")
   public DataloreLandingPage checkLogInHereButtonDisplayed() {
-    assertThat(
-        "Login in here button is not displayed", logInHereButton.isDisplayed(), equalTo(true));
+    assertThat("Login in here button is not displayed", logInHereButton.isDisplayed(), equalTo(true));
     return this;
   }
 
   @Step("Check that Create account button is displayed")
   public DataloreLandingPage checkCreateAccountButtonDisplayed() {
-    assertThat(
-        "Create account button is not displayed", createAccountButton.isDisplayed(), equalTo(true));
+    assertThat("Create account button is not displayed", createAccountButton.isDisplayed(), equalTo(true));
     return this;
   }
 
   @Step("Check that login header text is correct")
   public DataloreLandingPage checkLoginHeaderText(String text) {
-    assertThat(
-        "Login header text is: " + loginBlockHeader.getText(),
-        loginBlockHeader.getText(),
-        equalTo(text));
+    assertThat("Login header text is: " + loginBlockHeader.getText(), loginBlockHeader.getText(), equalTo(text));
     return this;
   }
 

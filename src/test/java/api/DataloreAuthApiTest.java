@@ -17,9 +17,7 @@ import org.junit.jupiter.api.Test;
 public class DataloreAuthApiTest {
     Faker faker = new Faker();
     AuthSteps authSteps = new AuthSteps();
-
     JSONObject jsonObj = new JSONObject();
-
 
     @Test
     @DisplayName("Check that successful login with correct log-pass is handled correctly")
@@ -66,7 +64,6 @@ public class DataloreAuthApiTest {
   @Test
   @DisplayName("Check that negative login with empty json is handled correctly")
   public void checkLoginWithEmptyJsonTest() {
-        System.out.println(jsonObj);
         authSteps.auth(jsonObj)
                 .then().statusCode(400)
                 .body(equalTo(""));
@@ -106,9 +103,8 @@ public class DataloreAuthApiTest {
     @Test
     @DisplayName("Check that incorrect parameter email with correct log-pass is handled correctly")
     public void checkIncorrectEmailParamTest() {
-    jsonObj
-        .put("emaail", "1nrsmsf@gmail.com")
-        .put("password", DataloreUtils.decodePassword("SCQyYzUlY3dkamI="));
+    jsonObj.put("emaail", "1nrsmsf@gmail.com")
+            .put("password", DataloreUtils.decodePassword("SCQyYzUlY3dkamI="));
 
         authSteps.auth(jsonObj)
                 .then().statusCode(400)
@@ -117,8 +113,7 @@ public class DataloreAuthApiTest {
     @Test
     @DisplayName("Check that incorrect parameter password with correct log-pass is handled correctly")
     public void checkIncorrectPasswordParamTest() {
-    jsonObj
-        .put("email", "1nrsmsf@gmail.com")
+    jsonObj.put("email", "1nrsmsf@gmail.com")
         .put("passwoord", DataloreUtils.decodePassword("SCQyYzUlY3dkamI="));
 
         authSteps.auth(jsonObj)
@@ -128,8 +123,7 @@ public class DataloreAuthApiTest {
     @Test
     @DisplayName("Check that incorrect parameters email and password with correct log-pass is handled correctly")
     public void checkIncorrectParamsTest() {
-    jsonObj
-        .put("emaail", "1nrsmsf@gmail.com")
+    jsonObj.put("emaail", "1nrsmsf@gmail.com")
         .put("passwoord", DataloreUtils.decodePassword("SCQyYzUlY3dkamI="));
 
         authSteps.auth(jsonObj)
@@ -168,8 +162,7 @@ public class DataloreAuthApiTest {
     @Test
     @DisplayName("Check that non-existent parameter with correct log-pass is handled correctly")
     public void checkNonExistParamTest() {
-        jsonObj
-                .put("email", "1nrsmsf@gmail.com")
+        jsonObj.put("email", "1nrsmsf@gmail.com")
                 .put("password", DataloreUtils.decodePassword("SCQyYzUlY3dkamI="))
                 .put("test", RandomStringUtils.randomAlphanumeric(10));
 

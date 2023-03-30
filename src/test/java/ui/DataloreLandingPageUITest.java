@@ -23,7 +23,6 @@ public class DataloreLandingPageUITest {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     PageManager pm;
 
-
     @BeforeEach
     public void setUp() {
         driver.get("https://k8s.stable.on-premise.datalore.io/");
@@ -35,14 +34,12 @@ public class DataloreLandingPageUITest {
         driver.quit();
     }
 
-
     @Test
     @DisplayName("Check if all elements displayed correctly")
     @Story("Datalore elements test")
     public void checkAllElementsDisplayedTest() {
         pm.dataloreLanding().checkAllElementsDisplayed();
     }
-
 
     @Test
     @DisplayName("Check password show button works correctly")
@@ -59,7 +56,6 @@ public class DataloreLandingPageUITest {
     @DisplayName("Check create an account button works correctly")
     @Story("Datalore elements test")
     public void checkCreateAccountButtonTest() {
-
         pm.dataloreLanding()
                 .checkLoginHeaderText("Log in")
                 .clickOnCreateAnAccountButton()
@@ -122,7 +118,6 @@ public class DataloreLandingPageUITest {
     @DisplayName("Check that email for forgot password sent")
     @Story("Datalore login test")
     public void checkForgotEmailSendingTest() {
-
         var email = faker.internet().emailAddress();
         pm.dataloreLanding()
                 .inputEmail(email)
@@ -135,7 +130,6 @@ public class DataloreLandingPageUITest {
     @DisplayName("Check email required message is displayed correctly")
     @Story("Datalore login test")
     public void checkEmailRequiredMessageTest() {
-
         pm.dataloreLanding()
                 .clickOnLogInButton()
                 .checkEmailRequiredMessageDisplayed();
@@ -145,7 +139,6 @@ public class DataloreLandingPageUITest {
     @DisplayName("Check password required message is displayed correctly")
     @Story("Datalore login test")
     public void checkPasswordRequiredMessageTest() {
-
         pm.dataloreLanding()
                 .clickOnLogInButton()
                 .checkPasswordRequiredMessageDisplayed();
@@ -155,7 +148,6 @@ public class DataloreLandingPageUITest {
     @DisplayName("Check email invalid message is displayed correctly")
     @Story("Datalore login test")
     public void checkEmailInvalidMessageTest() {
-
         pm.dataloreLanding()
                 .inputEmail(RandomStringUtils.randomAlphanumeric(5)
                         + "@" + RandomStringUtils.randomAlphanumeric(5))
@@ -167,7 +159,6 @@ public class DataloreLandingPageUITest {
     @DisplayName("Check login positive scenario works correctly")
     @Story("Datalore login test")
     public void checkPositiveLoginTest() {
-
         final var afterLoginUrl = "https://k8s.stable.on-premise.datalore.io/notebooks";
         pm.dataloreLanding()
                 .inputEmail("1nrsmsf@gmail.com")
@@ -181,7 +172,6 @@ public class DataloreLandingPageUITest {
     @DisplayName("Check login negative scenario works correctly")
     @Story("Datalore login test")
     public void checkNegativeLoginTest() {
-
         pm.dataloreLanding()
                 .inputEmail(faker.internet().emailAddress())
                 .inputPassword(faker.internet().password())
